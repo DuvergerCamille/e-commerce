@@ -13,4 +13,25 @@ class UserController extends Controller
             'controller_name' => 'UserController',
         ]);
     }
+
+    public function login()
+    {
+        return $this->render('user/test.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+
+    public function logout()
+    {
+        return $this->render('user/test.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+
+    public function signUp()
+    {
+        return $this->render('user/test.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
 }

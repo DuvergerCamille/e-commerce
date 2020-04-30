@@ -1,7 +1,98 @@
-body {
-        color:whitesmoke;
-        background-color: black;
-        background-image:url(https://www.lj-musique.fr/wp-content/uploads/2019/10/900x520_piano-min.jpg);
-        background-repeat:no-repeat;
-        background-size: cover;
+html { 
+    margin:0;
+    padding:0;
+    background: url(https://www.lj-musique.fr/wp-content/uploads/2019/10/900x520_piano-min.jpg) no-repeat center fixed; 
+    background-size: cover;
+  }
+
+body
+    {
+        color:rgb(158, 27, 27);
+    }
+
+header
+    {
+        max-width: 2000px;
+        min-width: 1000px;
+        background-color: rgb(0,0,0,0.5);
+        border-radius: 10px;
+    }
+
+h1
+    {
+        text-align: center;
+    }
+
+li.menu
+    {
+        display: inline;
+    }
+
+li.category
+    {
+        list-style: none;
+    }
+
+a
+    {
+        color:rgb(158, 27, 27);
+        text-decoration: none;
+    }
+
+a.menu
+    {
+        font-size: xx-large;
+        padding-right: 25px;
+    }
+
+a.category
+    {
+        font-size: x-large;
+        margin-left: -40px;
+    }
+
+footer
+    {
+        max-width: 2000px;
+        min-width: 1000px;
+        background-color: rgb(0,0,0,0.5);
+        border-radius: 10px;
+        text-align: center;
+        font-style: italic;
+    }
+
+main
+    {
+        height: inherit;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        max-width: 2000px;
+        min-width: 1000px;
+    }
+    
+main::after
+    {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+aside
+    {
+        text-align: center;
+        float: left;
+        width: 15%;
+        background-color: rgb(0,0,0,0.5);
+        border-radius: 10px;
+    }
+
+article
+    {
+        text-align-last: center;
+        min-height: 250px;
+        width: 80%;
+        float: right;
+        padding-right: 3%;
+        background-color: rgb(0,0,0,0.5);
+        border-radius: 10px;
     }
