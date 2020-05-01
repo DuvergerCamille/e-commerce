@@ -19,40 +19,15 @@
         <main>
             <aside>
                 <ul>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
-                    <li class="category"><a class="category" href="{{ path('login') }}">Article 1</a></li>
-                    <li class="category"><a class="category" href="{{ path('logout') }}">Article 2</a></li>
-                    <li class="category"><a class="category" href="{{ path('signUp') }}">Article 3</a></li>
+                    {% for category in listCategories %}
+                    <li class="category"><a class="category" href="{{ path('index') }}">{{ category.nom }}</a></li>
+                    <br />
+                    {% else %}
+                    <li class="category"><a class="category" href="{{ path('index') }}">Aucune famille d'instruments trouvée</a></li>
+                    {% endfor %}
                 </ul>
             </aside>
             <article>
-            blablablablablablablablabalbalablablblablablablablablablablablablbalblablablablblablablabalbalblablbalbaablabalb
         {% block body %}
         {% endblock %}
             </article>

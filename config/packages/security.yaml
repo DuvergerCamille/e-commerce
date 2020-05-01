@@ -7,7 +7,7 @@ security:
 
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        App\Entity\Users: plaintext
+        App\Entity\User: plaintext
     
     providers:
         main:
