@@ -11,7 +11,14 @@ Partitions - {{ parent() }}
 <h2>Partitions</h2>
 
 {% for sheet in listSheets %}
-<li>{{ sheet.name }} Prix: {{ sheet.price }}$</li>
+<li>
+    {{ sheet.name }} Prix: {{ sheet.price }}$
+    <a href="{{ path('edit_partition', {'id': sheet.id}) }}">
+      <button type="button">
+      Modifier l'article
+      </button>
+    </a>
+</li>
 {% else %}
 <li>Pas de partition en stock pour le moment !</li>
 {% endfor %}

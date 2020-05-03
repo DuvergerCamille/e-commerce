@@ -32,3 +32,29 @@ instruments:
 partitions:
     path: /shop/sheets
     controller: App\Controller\ShopController::sheets
+
+add_instrument:
+    path: /admin/instrument/add
+    controller: App\Controller\ShopController::addInstrument
+
+add_partition:
+    path: /admin/sheet/add
+    controller: App\Controller\ShopController::addSheet
+
+edit_instrument:
+    path: /admin/partition/edit
+    controller: App\Controller\ShopController::editInstrument
+
+edit_partition:
+    path: /admin/sheet/edit/{id}
+    requirements:
+        id: '\d+'
+    controller: App\Controller\ShopController::editSheet
+
+view_instruments:
+    path: /admin/instrument/view
+    controller: App\Controller\ShopController::viewInstrument
+
+view_partitions:
+    path: /admin/sheet/view
+    controller: App\Controller\ShopController::viewSheet
