@@ -20,3 +20,15 @@ logout:
 signUp:
     path: /signUp
     controller: App\Controller\UserController::signUp
+
+edit_profil:
+    path: /profile/edit
+    controller: App\Controller\UserController::edit
+
+instruments:
+    path: /shop/instruments
+    controller: App\Controller\ShopController::instruments
+
+partitions:
+    path: /shop/sheets
+    controller: App\Controller\ShopController::sheets

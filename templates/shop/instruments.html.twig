@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+
+Instruments - {{ parent() }}
+
+{% endblock %}
+
+{% block body %}
+
+<h2>Instruments</h2>
+
+{% for instrument in listInstruments %}
+<li>{{ instrument.name }} Prix: {{ instrument.price }}$</li>
+{% else %}
+<li>Pas d'instrument en stock pour le moment !</li>
+{% endfor %}
+
+{% endblock %}

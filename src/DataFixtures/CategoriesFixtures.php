@@ -14,9 +14,11 @@ class CategoriesFixtures extends Fixture
 
         foreach ($listCategory as $name)
         {
+            
             $category = new Categories();
 
             $category->setNom($name);
+            $category->addInstrument();
 
             $manager->persist($category);
         }

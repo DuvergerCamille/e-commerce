@@ -19,32 +19,14 @@ class SheetsRepository extends ServiceEntityRepository
         parent::__construct($registry, Sheets::class);
     }
 
-    // /**
-    //  * @return Sheets[] Returns an array of Sheets objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getSheetsInCategory(string $category)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('s');
 
-    /*
-    public function findOneBySomeField($value): ?Sheets
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb->innerJoin('s.categories', 'c')->addSelect('c');
+
+        $qb->andWhere('c.nom = :category')->setParameter('category', $category);
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+
+Partitions - {{ parent() }}
+
+{% endblock %}
+
+{% block body %}
+
+<h2>Partitions</h2>
+
+{% for sheet in listSheets %}
+<li>{{ sheet.name }} Prix: {{ sheet.price }}$</li>
+{% else %}
+<li>Pas d'instrument en stock pour le moment !</li>
+{% endfor %}
+
+{% endblock %}

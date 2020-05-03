@@ -2,4 +2,14 @@
 
 {% block body %}
     <h1>Hello !</h1>
+    {% for test in test %}
+    <li>{{test.name}}</li>
+    {% else %}
+    <li>Pas d'instrument dans cette catégorie.</li>
+    {% endfor %}
+    {% for test2 in test2 %}
+    <li>{{test.name}}</li>
+    {% else %}
+    <li>Pas de partition dans cette catégorie.</li>
+    {% endfor %}
 {% endblock %}

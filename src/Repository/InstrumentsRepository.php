@@ -19,32 +19,14 @@ class InstrumentsRepository extends ServiceEntityRepository
         parent::__construct($registry, Instruments::class);
     }
 
-    // /**
-    //  * @return Instruments[] Returns an array of Instruments objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getInstrumentsInCategory(string $category)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('i');
 
-    /*
-    public function findOneBySomeField($value): ?Instruments
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb->innerJoin('i.categories', 'c')->addSelect('c');
+
+        $qb->andWhere('c.nom = :category')->setParameter('category', $category);
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

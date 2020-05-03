@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Component\Collection\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SheetsRepository")
  */
 class Sheets
 {
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Categories", cascade={"persist"})
+     */
+    private $categories;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -25,6 +31,26 @@ class Sheets
      * @ORM\Column(type="integer")
      */
     private $price;
+
+    public function __construct()
+    {
+      $this->categories = new ArrayCollection();
+    }
+
+    public function addCategory(Categories $category)
+    {
+      $this->categories[] = $category;
+    }
+
+    public function removeCategory(Categories $category)
+    {
+      $this->categories->removeElement($category);
+    }
+
+    public function getCategories()
+    {
+      return $this->categories;
+    }
 
     public function getId(): ?int
     {

@@ -21,6 +21,7 @@ class Categories
      */
     private $nom;
 
+
     public function getId(): ?int
     {
         return $this->id;
