@@ -1,18 +1,14 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <h1>Hello !</h1>
-    {% for test in test %}
-    <li>{{test.name}}</li>
+    {% for instru in listInstruments %}
+    <li>{{ instru.name }} Prix: {{ instru.price }}$</li>
     {% else %}
     <li>Pas d'instrument dans cette catégorie.</li>
     {% endfor %}
-    {% for test2 in test2 %}
-    <li>{{test2.name}}</li>
+    {% for sheet in listSheets %}
+    <li>{{ sheet.name }} Prix: {{ sheet.price }}$</li>
     {% else %}
     <li>Pas de partition dans cette catégorie.</li>
     {% endfor %}
-    {% if app.user.username is defined %}
-    <h2>Bonjour {{ app.user.username }}</h2>
-    {% endif %}
 {% endblock %}

@@ -41,8 +41,14 @@ add_partition:
     path: /admin/sheet/add
     controller: App\Controller\ShopController::addSheet
 
+add_category:
+    path: /admin/category/add
+    controller: App\Controller\ShopController::addCategory
+
 edit_instrument:
-    path: /admin/partition/edit
+    path: /admin/partition/edit/{id}
+    requirements:
+        id: '\d+'
     controller: App\Controller\ShopController::editInstrument
 
 edit_partition:
@@ -58,3 +64,17 @@ view_instruments:
 view_partitions:
     path: /admin/sheet/view
     controller: App\Controller\ShopController::viewSheet
+
+view:
+    path: /view/{name}
+    controller: App\Controller\ShopController::view
+
+achat:
+    path: /buy/{name}/{id}
+    requirements:
+        id: '\d+'
+    controller: App\Controller\BasketController::buy
+
+panier:
+    path: /profile/basket
+    controller: App\Controller\BasketController::viewBasket

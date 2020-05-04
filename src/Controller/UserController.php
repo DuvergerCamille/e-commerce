@@ -18,12 +18,14 @@ use App\Repository\SheetsRepository;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $listCategories = $em->getRepository('App\Entity\Categories')->findAll();
         $test = $em->getRepository('App\Entity\Instruments')->getInstrumentsInCategory('Vent');
         $test2 = $em->getRepository('App\Entity\Sheets')->getSheetsInCategory('Vent');
+
+        
 
 
         return $this->render('user/test.html.twig', ['listCategories' => $listCategories, 'test' => $test, 'test2' => $test2]);

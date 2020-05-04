@@ -10,13 +10,13 @@ Instruments - {{ parent() }}
 
 <h2>Instruments</h2>
 
-{% for instrument in listInstruments %}
+{% for instru in listInstruments %}
 <li>
-    {{ instrument.name }} Prix: {{ instrument.price }}$
-    <a href="{{ path('achat', {'name': 'instrument', 'id': instrument.id}) }}">
-        <button type="button">
-        Acheter
-        </button>
+    {{ instru.name }} Prix: {{ instru.price }}$
+    <a href="{{ path('edit_instrument', {'id': instru.id}) }}">
+      <button type="button">
+      Modifier l'article
+      </button>
     </a>
 </li>
 {% else %}

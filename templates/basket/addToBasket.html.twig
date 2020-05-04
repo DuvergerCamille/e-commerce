@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+
+Ajout - {{ parent() }}
+
+{% endblock %}
+
+{% block body %}
+
+<h2>Ajout de l'article {{ prod.name }} à votre panier</h2>
+
+<h3>Combien de {{ prod.name }} souhaitez-vous ajouter à votre panier ?</h3>
+
+<div>
+    {{ form(form) }}
+</div>
+
+{% endblock %}

@@ -12,7 +12,7 @@ Partitions - {{ parent() }}
 
 {% for sheet in listSheets %}
 <li>
-    {{ sheet.name }} Prix: {{ sheet.price }}$
+  {{ sheet.name }} Prix: {{ sheet.price }}$
     <a href="{{ path('edit_partition', {'id': sheet.id}) }}">
       <button type="button">
       Modifier l'article

@@ -10,9 +10,13 @@
             <h1>Les Clefs En Fête</h1>
             <nav>
                 <ul>
-                    <li class="menu"><a class="menu" href="{{ path('login') }}">Se Connecter</a></li>
+                    {% if app.user.username is defined %}
                     <li class="menu"><a class="menu" href="{{ path('logout') }}">Se Déconnecter</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('edit_profil') }}">Profil</a></li>
+                    {% else %}
+                    <li class="menu"><a class="menu" href="{{ path('login') }}">Se Connecter</a></li>
                     <li class="menu"><a class="menu" href="{{ path('signUp') }}">S'inscrire</a></li>
+                    {% endif %}
                     <li class="menu"><a class="menu" href="{{ path('instruments') }}">Instruments</a></li>
                     <li class="menu"><a class="menu" href="{{ path('partitions') }}">Partitions</a></li>
                 </ul>
@@ -22,10 +26,10 @@
             <aside>
                 <ul>
                     {% for category in listCategories %}
-                    <li class="category"><a class="category" href="{{ path('index') }}">{{ category.nom }}</a></li>
+                    <li class="category"><a class="category" href="{{ path('view', {'name': category.nom}) }}">{{ category.nom }}</a></li>
                     <br />
                     {% else %}
-                    <li class="category"><a class="category" href="{{ path('index') }}">Aucune famille d'instruments trouvée</a></li>
+                    <li class="category"><a class="category" href="#">Aucune famille d'instruments trouvée</a></li>
                     {% endfor %}
                 </ul>
             </aside>
