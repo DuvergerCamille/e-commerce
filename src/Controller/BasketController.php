@@ -136,4 +136,53 @@ class BasketController extends Controller
         $request->getSession()->getFlashBag()->add('notice', 'Heureux de savoir votre commande entre vos mains !  Nous espérons vous revoir vite !');
         return $this->redirectToRoute('panier');
     }
+
+    public function delete(Request $request)
+    {
+        if (!$user = $this->getUser())
+        {
+            throw $this->createNotFoundException("Un problème est survenu lors de votre connexion.");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $cmd = $em->getRepository('App\Entity\Commande')->find($user->getCommande()->getId());
+        $listArticles = $em->getRepository('App\Entity\CommandeProduit')->getArticlesInCommande($user->getCommande()->getId());
+        $em->remove($cmd);
+        foreach ($listArticles as $article)
+        {
+            $em->remove($article);
+        }
+        $cmd1 = new Commande();
+        $cmd1->setDone(1);
+        $user->setCommande($cmd1);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Votre panier a bien été vidé.');
+        return $this->redirectToRoute('index');
+    }
+
+    public function commandesAdminView()
+    {
+        $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
+        $listCommandes = $this->getDoctrine()->getManager()->getRepository('App\Entity\Commande')->findBy(array('done' => 2));
+        return $this->render('basket/adminCommande.html.twig', ['listCategories' => $listCategories, 'listCommandes' => $listCommandes]);
+    }
+
+    public function deleteAdminCommande($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cmd = $em->getRepository('App\Entity\Commande')->find($id);
+        $listArticles = $em->getRepository('App\Entity\CommandeProduit')->getArticlesInCommande($id);
+        foreach ($listArticles as $article)
+        {
+            $em->remove($article);
+        }
+        $cmd1 = new Commande();
+        $cmd1->setDone(1);
+        $user = $em->getRepository('App\Entity\User')->findOneBy(array('commande' => $cmd));
+        $em->remove($cmd);
+        $user->setCommande($cmd1);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Commande client supprimée');
+        return $this->redirectToRoute('admin_commande');
+    }
 }

@@ -1,0 +1,33 @@
+{% extends "layoutAdmin.html.twig" %}
+
+{% block title %}
+    Clients - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
+<h2>Clients</h2>
+
+{% for user in listUsers %}
+<li>
+    Pseudo: {{ user.username }} 
+    <a href="{{ path('edit_user', {'id': user.id}) }}">
+      <button type="button">
+      Modifier
+      </button>
+    </a>
+    <a href="{{ path('supprimer_profil_client', {'id': user.id}) }}">
+      <button type="button">
+      Supprimer
+      </button>
+    </a>
+</li>
+{% else %}
+<li>Pas de client pour le moment.</li>
+{% endfor %}
+{% endblock %}

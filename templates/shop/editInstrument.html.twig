@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layoutAdmin.html.twig' %}
 
 {% block title %}
 
@@ -7,6 +7,12 @@ Edition - {{ parent() }}
 {% endblock %}
 
 {% block body %}
+
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
 
 <h2>Edition d'un instrument</h2>
 

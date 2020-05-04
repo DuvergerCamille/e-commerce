@@ -15,6 +15,12 @@ use App\Form\CategoriesType;
 
 class ShopController extends Controller
 {
+    public function index()
+    {
+        $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
+        return $this->render('shop/index.html.twig', ['listCategories' => $listCategories]);
+    }
+
     public function instruments()
     {
         $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();

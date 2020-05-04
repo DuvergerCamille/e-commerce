@@ -1,6 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
+
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
     {% for instru in listInstruments %}
     <li>{{ instru.name }} Prix: {{ instru.price }}$</li>
     {% else %}

@@ -3,7 +3,7 @@
 
 index:
     path: /
-    defaults: { _controller: 'App\Controller\UserController::index' }
+    defaults: { _controller: 'App\Controller\ShopController::index' }
 
 login:
     path: /login
@@ -68,3 +68,41 @@ commande_valide:
 reception:
     path: /profile/reception
     controller: App\Controller\BasketController::reception
+
+suppression_profil:
+    path: /profile/delete
+    controller: App\Controller\UserController::delete
+
+supprimer_panier:
+    path: /profil/basket/delete
+    controller: App\Controller\BasketController::delete
+
+index_admin:
+    path: /admin
+    controller: App\Controller\UserController::index
+
+admin_commande:
+    path: /admin/commande/view
+    controller: App\Controller\BasketController::commandesAdminView
+
+admin_user:
+    path: /admin/user/view
+    controller: App\Controller\UserController::usersAdminView
+
+edit_user:
+    path: /admin/user/edit/{id}
+    requirements:
+        id: '\d+'
+    controller: App\Controller\UserController::editAdminUser
+
+supprimer_profil_client:
+    path: /admin/user/delete/{id}
+    requirements:
+        id: '\d+'
+    controller: App\Controller\UserController::deleteAdminUser
+
+supprimer_commande:
+    path: /admin/commande/delete/{id}
+    requirements:
+        id: '\d+'
+    controller: App\Controller\BasketController::deleteAdminCommande

@@ -1,0 +1,28 @@
+{% extends "layoutAdmin.html.twig" %}
+
+{% block title %}
+    Commandes - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
+<h2>Commandes</h2>
+
+{% for cmd in listCommandes %}
+<li>
+    Commande n°{{ cmd.id }} 
+    <a href="{{ path('supprimer_commande', {'id': cmd.id}) }}">
+      <button type="button">
+      Supprimer
+      </button>
+    </a>
+</li>
+{% else %}
+<li>Pas de commande pour le moment.</li>
+{% endfor %}
+{% endblock %}

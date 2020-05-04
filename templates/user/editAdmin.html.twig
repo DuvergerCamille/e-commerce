@@ -1,8 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layoutAdmin.html.twig' %}
 
 {% block title %}
 
-Inscription - {{ parent() }}
+Profil Client- {{ parent() }}
 
 {% endblock %}
 
@@ -14,7 +14,7 @@ Inscription - {{ parent() }}
     {% endfor %}
 </div>
 
-<h2>Inscription</h2>
+<h2>Edition du profil client</h2>
 
 <div>
     {{ form(form) }}

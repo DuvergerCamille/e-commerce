@@ -1,0 +1,23 @@
+{% extends "layoutAdmin.html.twig" %}
+
+{% block title %}
+
+Admin - {{ parent() }}
+
+{% endblock %}
+
+{% block body %}
+
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
+<h2>Bienvenu.e dans la partie admin !</h2>
+<br />
+<p>Vous pouvez naviguer dans la partie Admin via le menu juste au dessus...</p>
+<br />
+<p>... ou retourner dans le magasin en observant les produits d'une catégorie juste à gauche.</p>
+
+{% endblock %}

@@ -8,10 +8,21 @@ Edition - {{ parent() }}
 
 {% block body %}
 
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
 <h2>Edition du profil</h2>
 
 <div>
     {{ form(form) }}
+    <a href="{{ path('suppression_profil') }}">
+        <button type="button">
+        Supprimer
+        </button>
+    </a>
 </div>
 
 {% endblock %}

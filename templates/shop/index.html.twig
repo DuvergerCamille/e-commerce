@@ -1,0 +1,28 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+
+{{ parent() }}
+
+{% endblock %}
+
+{% block body %}
+
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
+<h2>Bienvenu.e aux Clefs En Fête !</h2>
+<br />
+<p>Venez découvrir nos instruments manufacturés !</p>
+<p>Nous réalisons pour VOUS les instruments qui VOUS correspondent.</p>
+<p>Qu'il s'agisse de votre première guitare ou de votre 15ème flûte,</p>
+<p>nous avons ce qu'il vous faut !</p>
+<br />
+<p>Notre boutique (à Paris, Rue de Rome dans le 8ème bien entendu) vous accueille tous les jours de 9h à 20h !</p>
+<p>Nous proposons également des ateliers découverte de manufacture tous les mercredi à 14H30 pour petits et grands</p>
+<p>(pour plus de renseignements, demandez à l'accueil au magasin)</p>
+
+{% endblock %}

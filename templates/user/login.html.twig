@@ -8,6 +8,12 @@ Connexion - {{ parent() }}
 
 {% block body %}
 
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
 {% if error %}
 <div>{{ error.message }}</div>
 {% endif %}

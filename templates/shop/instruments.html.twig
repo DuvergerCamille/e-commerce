@@ -8,6 +8,12 @@ Instruments - {{ parent() }}
 
 {% block body %}
 
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
 <h2>Instruments</h2>
 
 {% for instrument in listInstruments %}

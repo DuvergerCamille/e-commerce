@@ -10,16 +10,13 @@
             <h1>Les Clefs En Fête</h1>
             <nav>
                 <ul>
-                    {% if app.user.username is defined %}
-                    <li class="menu"><a class="menu" href="{{ path('logout') }}">Se Déconnecter</a></li>
-                    <li class="menu"><a class="menu" href="{{ path('edit_profil') }}">Profil</a></li>
-                    {% else %}
-                    <li class="menu"><a class="menu" href="{{ path('login') }}">Se Connecter</a></li>
-                    <li class="menu"><a class="menu" href="{{ path('signUp') }}">S'inscrire</a></li>
-                    {% endif %}
-                    <li class="menu"><a class="menu" href="{{ path('instruments') }}">Instruments</a></li>
-                    <li class="menu"><a class="menu" href="{{ path('panier') }}">Panier</a></li>
-                    <li class="menu"><a class="menu" href="{{ path('index') }}">Accueil</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('add_category') }}">Ajout catégorie</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('add_instrument') }}">Ajout instrument</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('view_instruments') }}">Instruments</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('admin_commande') }}">Gestion commandes</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('admin_user') }}">Gestion utilisateurs</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('index_admin') }}">Accueil</a></li>
+                    <li class="menu"><a class="menu" href="{{ path('index') }}">Boutique</a></li>
                 </ul>
             </nav>
         </header>

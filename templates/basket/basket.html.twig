@@ -6,6 +6,13 @@ Panier - {{ parent() }}
 {% endblock %}
 
 {% block body %}
+
+    <div>
+        {% for message in app.flashes('notice') %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+
     {% if done is defined %}
     <h2>Vous avez déjà passé une commande, veuillez confirmer sa réception avant d'en repasser une autre.</h2>
     <a href="{{ path('reception') }}">
@@ -23,6 +30,11 @@ Panier - {{ parent() }}
         <a href="{{ path('commande_valide') }}">
             <button type="button">
             Valider la commande
+            </button>
+        </a>
+        <a href="{{ path('supprimer_panier') }}">
+            <button type="button">
+            Vider le panier
             </button>
         </a>
         {% else %}

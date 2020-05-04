@@ -8,6 +8,12 @@ Ajout - {{ parent() }}
 
 {% block body %}
 
+<div>
+    {% for message in app.flashes('notice') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+
 <h2>Ajout de l'article {{ prod.name }} à votre panier</h2>
 
 <h3>Combien de {{ prod.name }} souhaitez-vous ajouter à votre panier ?</h3>

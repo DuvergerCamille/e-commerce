@@ -13,19 +13,16 @@ use App\Entity\Categories;
 use App\Repository\CategoriesRepository;
 use App\Entity\Instruments;
 use App\Repository\InstrumentsRepository;
+use App\Entity\Commande;
+use App\Repository\CommandeRepository;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $em = $this->getDoctrine()->getManager();
-        $listCategories = $em->getRepository('App\Entity\Categories')->findAll();
-        $test = $em->getRepository('App\Entity\Instruments')->getInstrumentsInCategory('Vent');
-
-        //NE PAS OUBLIER DE SE CHARGER DE CE TRUC
-
-
-        return $this->render('user/test.html.twig', ['listCategories' => $listCategories, 'test' => $test]);
+        $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
+        return $this->render('user/index.html.twig', ['listCategories' => $listCategories]);
     }
 
     public function login(Request $request)
@@ -68,7 +65,7 @@ class UserController extends Controller
 	  
 			    $request->getSession()->getFlashBag()->add('notice', 'Bienvenu.e nouveau membre!');
 	  
-			    return $this->redirectToRoute('index', ['listCategories' => $listCategories]);
+			    return $this->redirectToRoute('login', ['listCategories' => $listCategories]);
 			}
 		  }
 	  
@@ -106,5 +103,66 @@ class UserController extends Controller
         }
 
         return $this->redirectToRoute('login', ['listCategories' => $listCategories]);
+    }
+
+    public function delete(Request $request)
+    {
+        if (!$user = $this->getUser())
+        {
+            throw $this->createNotFoundException("Un problème est survenu lors de votre connexion.");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Compte supprimé.');
+        $session = new Session();
+        $session->invalidate();
+        return $this->redirectToRoute('index');
+    }
+
+    public function usersAdminView()
+    {
+        $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
+        $listUsers = $this->getDoctrine()->getManager()->getRepository('App\Entity\User')->findAll();
+        return $this->render('user/adminUsers.html.twig', ['listCategories' => $listCategories, 'listUsers' => $listUsers]);
+    }
+
+    public function deleteAdminUser($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('App\Entity\User')->find($id);
+        $cmd = $em->getRepository('App\Entity\Commande')->find($user->getCommande()->getId());
+        $em->remove($cmd);
+        $em->remove($user);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Client supprimé');
+        return $this->redirectToRoute('admin_user');
+    }
+
+    public function editAdminUser($id, Request $request)
+    {
+        $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
+
+        $user = $this->getDoctrine()->getManager()->getRepository('App\Entity\User')->find($id);
+
+        $form   = $this->createForm(UserType::class, $user);
+
+        if ($request->isMethod('POST'))
+        {	
+			$form->handleRequest($request);
+	  
+            if ($form->isValid())
+            {
+			    $em = $this->getDoctrine()->getManager();
+			    $em->flush();
+	  
+			    $request->getSession()->getFlashBag()->add('notice', 'Modifications prises en compte!');
+	  
+			    return $this->redirectToRoute('admin_user', ['listCategories' => $listCategories]);
+			}
+        }
+
+        return $this->render('user/editAdmin.html.twig', ['form' => $form->createView(), 'listCategories' => $listCategories]);
     }
 }
