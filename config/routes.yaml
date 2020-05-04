@@ -29,48 +29,30 @@ instruments:
     path: /shop/instruments
     controller: App\Controller\ShopController::instruments
 
-partitions:
-    path: /shop/sheets
-    controller: App\Controller\ShopController::sheets
-
 add_instrument:
     path: /admin/instrument/add
     controller: App\Controller\ShopController::addInstrument
-
-add_partition:
-    path: /admin/sheet/add
-    controller: App\Controller\ShopController::addSheet
 
 add_category:
     path: /admin/category/add
     controller: App\Controller\ShopController::addCategory
 
 edit_instrument:
-    path: /admin/partition/edit/{id}
+    path: /admin/instrument/edit/{id}
     requirements:
         id: '\d+'
     controller: App\Controller\ShopController::editInstrument
 
-edit_partition:
-    path: /admin/sheet/edit/{id}
-    requirements:
-        id: '\d+'
-    controller: App\Controller\ShopController::editSheet
-
 view_instruments:
     path: /admin/instrument/view
     controller: App\Controller\ShopController::viewInstrument
-
-view_partitions:
-    path: /admin/sheet/view
-    controller: App\Controller\ShopController::viewSheet
 
 view:
     path: /view/{name}
     controller: App\Controller\ShopController::view
 
 achat:
-    path: /buy/{name}/{id}
+    path: /profile/buy/instrument/{id}
     requirements:
         id: '\d+'
     controller: App\Controller\BasketController::buy
@@ -78,3 +60,11 @@ achat:
 panier:
     path: /profile/basket
     controller: App\Controller\BasketController::viewBasket
+
+commande_valide:
+    path: /profile/commande
+    controller: App\Controller\BasketController::commande
+
+reception:
+    path: /profile/reception
+    controller: App\Controller\BasketController::reception

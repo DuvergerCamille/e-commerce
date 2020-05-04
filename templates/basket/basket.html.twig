@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+
+Panier - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% if done is defined %}
+    <h2>Vous avez déjà passé une commande, veuillez confirmer sa réception avant d'en repasser une autre.</h2>
+    <a href="{{ path('reception') }}">
+        <button type="button">
+        Confirmer Reception
+        </button>
+    </a>
+    {% else %}
+        {% if  listArticles != NULL %}
+        <ul>
+            {% for article in listArticles %}
+            <li> {{ article.quantity}} x {{ article.instrument.name }} à {{ article.instrument.price }}$ l'unité</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ path('commande_valide') }}">
+            <button type="button">
+            Valider la commande
+            </button>
+        </a>
+        {% else %}
+        <li>Votre panier est vide pour le moment.</li>           
+        {% endif %}
+    {% endif %}
+{% endblock %}

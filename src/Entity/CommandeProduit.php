@@ -22,14 +22,12 @@ class CommandeProduit
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commande")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", cascade={"persist"})
      */
     private $commande;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Instruments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Instruments", cascade={"persist"})
      */
     private $instrument;
 

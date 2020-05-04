@@ -13,8 +13,6 @@ use App\Entity\Categories;
 use App\Repository\CategoriesRepository;
 use App\Entity\Instruments;
 use App\Repository\InstrumentsRepository;
-use App\Entity\Sheets;
-use App\Repository\SheetsRepository;
 
 class UserController extends Controller
 {
@@ -23,12 +21,11 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $listCategories = $em->getRepository('App\Entity\Categories')->findAll();
         $test = $em->getRepository('App\Entity\Instruments')->getInstrumentsInCategory('Vent');
-        $test2 = $em->getRepository('App\Entity\Sheets')->getSheetsInCategory('Vent');
 
-        
+        //NE PAS OUBLIER DE SE CHARGER DE CE TRUC
 
 
-        return $this->render('user/test.html.twig', ['listCategories' => $listCategories, 'test' => $test, 'test2' => $test2]);
+        return $this->render('user/test.html.twig', ['listCategories' => $listCategories, 'test' => $test]);
     }
 
     public function login(Request $request)
@@ -60,7 +57,9 @@ class UserController extends Controller
 	  
             if ($form->isValid())
             {
-
+                $cmd = new Commande();
+                $cmd->setDone(1);
+                $user->setCommande($cmd);
                 $user->setSalt('');
                 $user->setRoles(array('ROLE_USER'));
 			    $em = $this->getDoctrine()->getManager();

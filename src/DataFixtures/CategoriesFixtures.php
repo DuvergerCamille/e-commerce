@@ -18,7 +18,6 @@ class CategoriesFixtures extends Fixture
             $category = new Categories();
 
             $category->setNom($name);
-            $category->addInstrument();
 
             $manager->persist($category);
         }

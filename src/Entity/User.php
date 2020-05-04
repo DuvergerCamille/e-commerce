@@ -11,6 +11,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Commande", cascade={"persist"})
+     */
+    private $commande;
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -36,6 +41,16 @@ class User implements UserInterface
      * @ORM\Column(type="array")
      */
     private $roles = [];
+
+    public function setCommande(Commande $cmd)
+    {
+      $this->commande = $cmd;
+    }
+  
+    public function getCommande()
+    {
+      return $this->commande;
+    }
 
     public function getId(): ?int
     {

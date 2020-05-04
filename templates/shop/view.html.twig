@@ -6,9 +6,4 @@
     {% else %}
     <li>Pas d'instrument dans cette catégorie.</li>
     {% endfor %}
-    {% for sheet in listSheets %}
-    <li>{{ sheet.name }} Prix: {{ sheet.price }}$</li>
-    {% else %}
-    <li>Pas de partition dans cette catégorie.</li>
-    {% endfor %}
 {% endblock %}

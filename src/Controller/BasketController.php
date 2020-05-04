@@ -9,53 +9,39 @@ use App\Entity\Instruments;
 use App\Entity\Categories;
 use App\Repository\InstrumentsRpository;
 use App\Repository\CategoriesRepository;
-use App\Entity\Sheets;
-use App\Repository\SheetsRpository;
 use App\Entity\CommandeProduit;
 use App\Repository\CommandeProduitRpository;
 use App\Entity\Commande;
 use App\Repository\CommandeRpository;
 use App\Form\BasketType;
+use Symfony\Component\HttpFoundation\Response;
 
 class BasketController extends Controller
 {
-    public function buy($id, $name, Request $request)
+    public function buy($id, Request $request)
     {
-        if ($name === 'instrument')
+        $prod = $this->getDoctrine()->getManager()->getRepository('App\Entity\Instruments')->find($id);
+        if (null === $prod)
         {
-            $prod = $this->getDoctrine()->getManager()->getRepository('App\Entity\Instruments')->find($id);
-            if (null === $prod)
-            {
-	            throw $this->createNotFoundException("L'instrument d'id ".$id." n'existe pas.");
-	        }
-        }
-        else if ($name === 'sheet')
+	        throw $this->createNotFoundException("L'instrument d'id ".$id." n'existe pas.");
+	    }
+               
+        if (!$user = $this->getUser())
         {
-            $prod = $this->getDoctrine()->getManager()->getRepository('App\Entity\Sheets')->find($id);
-            if (null === $prod)
-            {
-	            throw $this->createNotFoundException("La partition d'id ".$id." n'existe pas.");
-	        }
+            throw $this->createNotFoundException("Un problème est survenu lors de votre connexion.");
         }
-        else
-        {
-            throw $this->createNotFoundException("Cet article n'existe pas.");
-        }
-
-        if (!$session = $request->getSession()->get('basket'))
+        
+        if (!$user->getCommande())
         {
             $cmd = new Commande();
-            $session = $request->getSession()->set('basket', $cmd->getId());
+            $cmd->setDone(1);
+            $user->setCommande($cmd);
         }
         else
         {
-            $cmd = $this->getDoctrine()->getManager()->getRepository('App\Entity\Commande')->find($request->getSession()->get('basket'));
+            $cmd = $this->getDoctrine()->getManager()->getRepository('App\Entity\Commande')->find($user->getCommande()->getId());
         }
-
         $bsk = new CommandeProduit();
-        $bsk->setCommande($cmd);
-        //ne pas oublier le if/else pour les partitions si ça fonctionne
-        $bsk->setInstrument($prod);
 
         $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
 
@@ -67,11 +53,16 @@ class BasketController extends Controller
 	  
 			if ($form->isValid())
             {
-			    $em = $this->getDoctrine()->getManager()->persist($bsk)->flush();
+                $bsk->setCommande($cmd);
+                $bsk->setInstrument($prod);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($bsk);
+                $em->flush();
 	  
                 $request->getSession()->getFlashBag()->add('notice', 'Article ajouté à votre panier.');
 	  
-			    return $this->redirectToRoute('index', ['listCategories' => $listCategories]);
+			    return $this->redirectToRoute('panier', ['listCategories' => $listCategories]);
 			}
 		  }
 	   
@@ -80,6 +71,69 @@ class BasketController extends Controller
 
     public function viewBasket()
     {
+        if (!$user = $this->getUser())
+        {
+            throw $this->createNotFoundException("Un problème est survenu lors de votre connexion.");
+        }
+
+        $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
         
+        if (!$user->getCommande())
+        {
+            $cmd = new Commande();
+            $cmd->setDone(1);
+            $user->setCommande($cmd);
+        }
+        else
+        {
+            $cmd = $this->getDoctrine()->getManager()->getRepository('App\Entity\Commande')->find($user->getCommande()->getId());
+        }
+
+        if ($cmd->getDone() === 2)
+        {
+            $done = 'Vous avez déjà passé une commande.';
+            return $this->render('basket/basket.html.twig', ['listCategories' => $listCategories, 'done' => $done]);
+        }
+
+        $listArticles = $this->getDoctrine()->getManager()->getRepository('App\Entity\CommandeProduit')->getArticlesInCommande($cmd->getId());
+        return $this->render('basket/basket.html.twig', ['listCategories' => $listCategories, 'listArticles' => $listArticles]);
+    }
+
+    public function commande(Request $request)
+    {
+        if (!$user = $this->getUser())
+        {
+            throw $this->createNotFoundException("Un problème est survenu lors de votre connexion.");
+        }
+
+        $cmd = $this->getDoctrine()->getManager()->getRepository('App\Entity\Commande')->find($user->getCommande()->getId());
+        $cmd->setDone(2);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Commande bien passée ! Merci de votre confiance !');
+        return $this->redirectToRoute('panier');
+    }
+
+    public function reception(Request $request)
+    {
+        if (!$user = $this->getUser())
+        {
+            throw $this->createNotFoundException("Un problème est survenu lors de votre connexion.");
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $cmd = $em->getRepository('App\Entity\Commande')->find($user->getCommande()->getId());
+        $listArticles = $em->getRepository('App\Entity\CommandeProduit')->getArticlesInCommande($user->getCommande()->getId());
+        $em->remove($cmd);
+        foreach ($listArticles as $article)
+        {
+            $em->remove($article);
+        }
+        $cmd1 = new Commande();
+        $cmd1->setDone(1);
+        $user->setCommande($cmd1);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Heureux de savoir votre commande entre vos mains !  Nous espérons vous revoir vite !');
+        return $this->redirectToRoute('panier');
     }
 }

@@ -19,32 +19,14 @@ class CommandeProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, CommandeProduit::class);
     }
 
-    // /**
-    //  * @return CommandeProduit[] Returns an array of CommandeProduit objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getArticlesInCommande($id)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('cp');
 
-    /*
-    public function findOneBySomeField($value): ?CommandeProduit
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb->innerJoin('cp.commande', 'c')->addSelect('c');
+
+        $qb->andWhere('c.id = :id')->setParameter('id', $id);
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }
