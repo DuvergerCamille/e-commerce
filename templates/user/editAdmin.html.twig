@@ -8,7 +8,7 @@ Profil Client- {{ parent() }}
 
 {% block body %}
 
-<div>
+<div class="flash">
     {% for message in app.flashes('notice') %}
         <p>{{ message }}</p>
     {% endfor %}
@@ -16,8 +16,6 @@ Profil Client- {{ parent() }}
 
 <h2>Edition du profil client</h2>
 
-<div>
-    {{ form(form) }}
-</div>
+{{ include("user/_form.html.twig") }}
 
 {% endblock %}

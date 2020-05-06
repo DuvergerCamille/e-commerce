@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<div>
+<div class="flash">
     {% for message in app.flashes('notice') %}
         <p>{{ message }}</p>
     {% endfor %}
@@ -14,7 +14,7 @@
 <h2>Commandes</h2>
 
 {% for cmd in listCommandes %}
-<li>
+<li class="article">
     Commande n°{{ cmd.id }} 
     <a href="{{ path('supprimer_commande', {'id': cmd.id}) }}">
       <button type="button">
@@ -23,6 +23,6 @@
     </a>
 </li>
 {% else %}
-<li>Pas de commande pour le moment.</li>
+<li class="article">Pas de commande pour le moment.</li>
 {% endfor %}
 {% endblock %}

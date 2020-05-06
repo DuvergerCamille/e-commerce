@@ -2,15 +2,22 @@
 
 {% block body %}
 
-<div>
+<div class="flash">
     {% for message in app.flashes('notice') %}
         <p>{{ message }}</p>
     {% endfor %}
 </div>
 
     {% for instru in listInstruments %}
-    <li>{{ instru.name }} Prix: {{ instru.price }}$</li>
+    <li class="article">
+        {{ instru.name }} Prix: {{ instru.price }}$
+        <a href="{{ path('achat', {'name': 'instrument', 'id': instru.id}) }}">
+        <button type="button">
+        Acheter
+        </button>
+        </a>
+    </li>
     {% else %}
-    <li>Pas d'instrument dans cette catégorie.</li>
+    <li class="article">Pas d'instrument dans cette catégorie.</li>
     {% endfor %}
 {% endblock %}

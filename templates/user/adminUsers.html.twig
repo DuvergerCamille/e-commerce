@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<div>
+<div class="flash">
     {% for message in app.flashes('notice') %}
         <p>{{ message }}</p>
     {% endfor %}

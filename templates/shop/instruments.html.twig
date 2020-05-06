@@ -8,7 +8,7 @@ Instruments - {{ parent() }}
 
 {% block body %}
 
-<div>
+<div class="flash">
     {% for message in app.flashes('notice') %}
         <p>{{ message }}</p>
     {% endfor %}
@@ -17,7 +17,7 @@ Instruments - {{ parent() }}
 <h2>Instruments</h2>
 
 {% for instrument in listInstruments %}
-<li>
+<li class="article">
     {{ instrument.name }} Prix: {{ instrument.price }}$
     <a href="{{ path('achat', {'name': 'instrument', 'id': instrument.id}) }}">
         <button type="button">
@@ -26,7 +26,7 @@ Instruments - {{ parent() }}
     </a>
 </li>
 {% else %}
-<li>Pas d'instrument en stock pour le moment !</li>
+<li class="article">Pas d'instrument en stock pour le moment !</li>
 {% endfor %}
 
 {% endblock %}

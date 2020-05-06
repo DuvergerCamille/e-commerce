@@ -7,7 +7,7 @@ Panier - {{ parent() }}
 
 {% block body %}
 
-    <div>
+    <div class="flash">
         {% for message in app.flashes('notice') %}
             <p>{{ message }}</p>
         {% endfor %}
@@ -24,7 +24,7 @@ Panier - {{ parent() }}
         {% if  listArticles != NULL %}
         <ul>
             {% for article in listArticles %}
-            <li> {{ article.quantity}} x {{ article.instrument.name }} à {{ article.instrument.price }}$ l'unité</li>
+            <li class="article"> {{ article.quantity}} x {{ article.instrument.name }} à {{ article.instrument.price }}$ l'unité</li>
             {% endfor %}
         </ul>
         <a href="{{ path('commande_valide') }}">
@@ -38,7 +38,7 @@ Panier - {{ parent() }}
             </button>
         </a>
         {% else %}
-        <li>Votre panier est vide pour le moment.</li>           
+        <li class="article">Votre panier est vide pour le moment.</li>           
         {% endif %}
     {% endif %}
 {% endblock %}

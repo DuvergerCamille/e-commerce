@@ -1,0 +1,23 @@
+<div class="formulaire">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="groupe">
+        {{ form_label(form.username, "Identifiant") }}
+        {{ form_errors(form.username) }}
+        <div class="boite">
+            {{ form_widget(form.username)}}
+        </div>
+    </div>
+    <br />
+    <div class="groupe">
+        {{ form_label(form.password, "Mot de passe") }}
+        {{ form_errors(form.password) }}
+        <div class="boite">
+            {{ form_widget(form.password)}}
+        </div>
+    </div>
+    <br />
+    {{ form_widget(form.save)}}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+</div>
