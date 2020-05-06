@@ -18,8 +18,21 @@ Ajout - {{ parent() }}
 
 <h3>Combien de {{ prod.name }} souhaitez-vous ajouter à votre panier ?</h3>
 
-<div>
-    {{ form(form) }}
+<div class="formulaire">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="groupe">
+        {{ form_label(form.quantity, "Quantité") }}
+        {{ form_errors(form.quantity) }}
+        <div class="boite">
+            {{ form_widget(form.quantity)}}
+        </div>
+    </div>
+    <br />
+    {{ form_widget(form.confirmer)}}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
 </div>
+<br />
 
 {% endblock %}

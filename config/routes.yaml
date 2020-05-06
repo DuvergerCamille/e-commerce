@@ -106,3 +106,9 @@ supprimer_commande:
     requirements:
         id: '\d+'
     controller: App\Controller\BasketController::deleteAdminCommande
+
+voir_commande:
+    path: /admin/commande/view/{id}
+    requirements:
+        id: '\d+'
+    controller: App\Controller\BasketController::viewAdminCommande

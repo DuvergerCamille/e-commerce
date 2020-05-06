@@ -1,0 +1,32 @@
+<div class="formulaire">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="groupe">
+        {{ form_label(form.name, "Instrument") }}
+        {{ form_errors(form.name) }}
+        <div class="boite">
+            {{ form_widget(form.name)}}
+        </div>
+    </div>
+    <br />
+    <div class="groupe">
+        {{ form_label(form.price, "Prix") }}
+        {{ form_errors(form.price) }}
+        <div class="boite">
+            {{ form_widget(form.price) }}
+        </div>
+    </div>
+    <br />
+    <div class="groupe">
+        {{ form_label(form.categories, "Catégories") }}
+        {{ form_errors(form.categories) }}
+        <div class="boite">
+            {{ form_widget(form.categories) }}
+        </div>
+    </div>
+    <br />
+    {{ form_widget(form.confirmer)}}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+</div>
+<br />

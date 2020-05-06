@@ -1,0 +1,22 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}
+
+Commande - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="flash">
+        {% for message in app.flashes('notice') %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <ul>
+        {% for article in listArticles %}
+        <li class="article"> {{ article.quantity}} x {{ article.instrument.name }} à {{ article.instrument.price }}$ l'unité</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

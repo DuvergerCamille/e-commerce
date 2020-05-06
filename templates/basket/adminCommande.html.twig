@@ -21,6 +21,11 @@
       Supprimer
       </button>
     </a>
+    <a href="{{ path('voir_commande', {'id': cmd.id}) }}">
+      <button type="button">
+      Voir
+      </button>
+    </a>
 </li>
 {% else %}
 <li class="article">Pas de commande pour le moment.</li>

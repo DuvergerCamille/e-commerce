@@ -185,4 +185,12 @@ class BasketController extends Controller
         $request->getSession()->getFlashBag()->add('notice', 'Commande client supprimée');
         return $this->redirectToRoute('admin_commande');
     }
+
+    public function viewAdminCommande($id)
+    {
+        $listCategories = $this->getDoctrine()->getManager()->getRepository('App\Entity\Categories')->findAll();
+
+        $listArticles = $this->getDoctrine()->getManager()->getRepository('App\Entity\CommandeProduit')->getArticlesInCommande($id);
+        return $this->render('basket/viewAdminCommande.html.twig', ['listCategories' => $listCategories, 'listArticles' => $listArticles]);
+    }
 }

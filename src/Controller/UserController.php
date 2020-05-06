@@ -16,6 +16,7 @@ use App\Repository\InstrumentsRepository;
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Encoder;
 
 class UserController extends Controller
 {

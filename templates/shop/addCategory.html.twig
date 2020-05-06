@@ -16,8 +16,21 @@ Ajout - {{ parent() }}
 
 <h2>Ajout d'une catégorie</h2>
 
-<div>
-    {{ form(form) }}
+<div class="formulaire">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="groupe">
+        {{ form_label(form.nom, "Catégorie") }}
+        {{ form_errors(form.nom) }}
+        <div class="boite">
+            {{ form_widget(form.nom)}}
+        </div>
+    </div>
+    <br />
+    {{ form_widget(form.confirmer) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
 </div>
+<br />
 
 {% endblock %}

@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -15,14 +16,14 @@ class InstrumentsType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('price', TextType::class)
+            ->add('price', IntegerType::class)
             ->add('categories', EntityType::class, array(
                 'class'        => 'App\Entity\Categories',
                 'choice_label' => 'nom',
                 'multiple'     => true,
                 'expanded'     => true,
             ))
-            ->add('save', SubmitType::class)
+            ->add('confirmer', SubmitType::class)
         ;
     }
 
